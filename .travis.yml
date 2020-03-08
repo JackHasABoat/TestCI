@@ -11,4 +11,4 @@ install:
   - pip install -r requirements.txt
 script:
   - echo $PYTHONPATH
-  - python tests/tests.py
+  - python myapp/tests/tests.py
