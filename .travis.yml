@@ -10,5 +10,6 @@ before_install:
 install:
   - pip install -r requirements.txt
 script:
-  - echo $PYTHONPATH
+  - export PYTHONPATH=$PYTHONPATH:$(pwd)
+  - echo "PYTHONPATH=$PYTHONPATH"
   - python myapp/tests/tests.py
