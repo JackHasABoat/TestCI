@@ -2,11 +2,19 @@ language: python
 python:
   - "3.6"
 cache: pip
+services:
+  - docker
 before_install:
+  - echo "$TRAVIS_BUILD_NUMBER"
   - echo "TRAVIS_REPO_SLUG=$TRAVIS_REPO_SLUG"
   - echo "TRAVIS_COMMIT=$TRAVIS_COMMIT"
   - echo "TRAVIS_COMMIT_MESSAGE=$TRAVIS_COMMIT_MESSAGE"
   - echo "TRAVIS_EVENT_TYPE=$TRAVIS_EVENT_TYPE"
+  - echo $HOME
+  - echo "$HOME"
+  - echo "pwd"
+  - echo "$(pwd)"
+  - echo "$TRAVIS_BUILD_DIR"
 install:
   - pip install -r requirements.txt
 script:
