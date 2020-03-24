@@ -39,6 +39,7 @@ before_script:
 script:
   - export PYTHONPATH=$PYTHONPATH:$(pwd)
   - echo "PYTHONPATH=$PYTHONPATH"
+  - flake8 . --count --show-source --statistics
   - python myapp/tests/tests.py
 
 after_success:
