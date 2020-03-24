@@ -2,22 +2,54 @@ language: python
 python:
   - "3.6"
 cache: pip
+
+env:
+  global:
+    - FLASK_DIR=myapp
+
 services:
   - docker
+
 before_install:
-  - echo "$TRAVIS_BUILD_NUMBER"
+  - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH"
+  - echo "TRAVIS_BUILD_ID=$TRAVIS_BUILD_ID"
+  - echo "TRAVIS_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER"
   - echo "TRAVIS_REPO_SLUG=$TRAVIS_REPO_SLUG"
   - echo "TRAVIS_COMMIT=$TRAVIS_COMMIT"
   - echo "TRAVIS_COMMIT_MESSAGE=$TRAVIS_COMMIT_MESSAGE"
   - echo "TRAVIS_EVENT_TYPE=$TRAVIS_EVENT_TYPE"
-  - echo $HOME
-  - echo "$HOME"
-  - echo "pwd"
-  - echo "$(pwd)"
+  - echo "Current Branch= $(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)"
+  - echo "TRAVIS_OS_NAME=$TRAVIS_OS_NAME"
   - echo "$TRAVIS_BUILD_DIR"
+  - echo "$TRAVIS_PYTHON_VERSION"
+  - echo "$VIRTUAL_ENV"
+  - echo "$(whoami)"
+  - echo "$HOME"
+  - echo "$(pwd)"
+  - echo "$(date)"
+  - export version=0.$(date "+%Y%m%d")_$TRAVIS_BUILD_NUMBER
+  - echo "$version"
+  - netstat -an | grep 8080 || true
+
 install:
+  - sudo apt-get update
   - pip install -r requirements.txt
+
+before_script:
 script:
   - export PYTHONPATH=$PYTHONPATH:$(pwd)
   - echo "PYTHONPATH=$PYTHONPATH"
   - python myapp/tests/tests.py
+
+after_success:
+  - echo "Build and test successful. TRAVIS_TEST_RESULT=$TRAVIS_TEST_RESULT"
+  - echo "$(pwd)"
+  - echo "$(ls -al)"
+
+after_failure:
+  - echo "Build or test failed. TRAVIS_TEST_RESULT=$TRAVIS_TEST_RESULT"
+
+deploy:
+
+notifications:
+  email: jackhasaboat@gmail.com

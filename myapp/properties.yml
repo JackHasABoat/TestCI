@@ -1,0 +1,4 @@
+api:
+   publicHostname: testapp.com
+   path: /api/myapp
+   port: 5000
