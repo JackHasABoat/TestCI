@@ -19,9 +19,11 @@ RUN yum -y update; yum -y install \
 RUN mkdir /app
 COPY requirements.txt /app/requirements.txt
 WORKDIR /app
-RUN pip install -r requirements.txt
+RUN pip3.6 install -r requirements.txt
 COPY myapp /app
-ENV PYTHONPATH /app/myapp:$PYTHONPATH
 
+ENV PYTHONPATH /app/myapp:$PYTHONPATH
+ENV LC_ALL en_US.utf-8
+ENV LANG en_US.utf-8
 ENV FLASK_APP myapp/api.py
 CMD flask run
