@@ -13,12 +13,15 @@ RUN yum -y update; yum -y install \
     python36-PyYAML \
     wget \
     which \
-    && pip3.6 install Flask \
-                      gunicorn \
-                      PyYAML \
-                      requests \
     && yum --enablerepo=* clean all \
     && rm -rf /var/cache/yum
 
-CMD ["python","/opt/myapp/api.py"]
-COPY myapp /opt/myapp
+RUN mkdir /app
+COPY requirements.txt /app/requirements.txt
+WORKDIR /app
+RUN pip install -r requirements.txt
+COPY myapp /app
+ENV PYTHONPATH /app/myapp:$PYTHONPATH
+
+ENV FLASK_APP myapp/api.py
+CMD flask run
