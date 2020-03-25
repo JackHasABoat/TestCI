@@ -20,13 +20,13 @@ app = Flask(__name__, static_url_path='%s/static' % (theAppPath))
 
 @app.route('/')
 def hello_world():
-    return 'Hey, we have Flask in a Docker container!'
+    return 'Hey, we have Flask in a Docker container!\n'
 
 # Healthy Check
 # Test with http://localhost:5000/health
 @app.route('/health', methods=['GET'])
 def healthChecking():
-    return 'Version 0.10', 200
+    return 'Version 0.10\n', 200
 
 # Get the mail users' server and mailfile info by Customer ID
 # Test with http://localhost:5000/download/abc/123?extension=txt

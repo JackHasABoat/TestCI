@@ -26,4 +26,4 @@ ENV PYTHONPATH /app/myapp:$PYTHONPATH
 ENV LC_ALL en_US.utf-8
 ENV LANG en_US.utf-8
 ENV FLASK_APP myapp/api.py
-CMD flask run
+CMD flask run --host 0.0.0.0
