@@ -23,7 +23,7 @@ WORKDIR /app/myapp
 RUN pip3.6 install -r requirements.txt
 COPY myapp /app/myapp
 
-ENV PYTHONPATH /app/myapp:$PYTHONPATH
+ENV PYTHONPATH /app:$PYTHONPATH
 ENV LC_ALL en_US.utf-8
 ENV LANG en_US.utf-8
 ENV FLASK_APP api.py
