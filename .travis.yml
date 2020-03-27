@@ -36,6 +36,7 @@ install:
   - pip install -r requirements.txt
 
 before_script:
+
 script:
   - export PYTHONPATH=$PYTHONPATH:$(pwd)
   - echo "PYTHONPATH=$PYTHONPATH"
@@ -52,6 +53,7 @@ after_failure:
   - echo "Build or test failed. TRAVIS_TEST_RESULT=$TRAVIS_TEST_RESULT"
 
 deploy:
+
 
 notifications:
   email: jackhasaboat@gmail.com
